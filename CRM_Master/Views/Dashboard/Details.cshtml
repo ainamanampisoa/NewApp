@@ -1,0 +1,81 @@
+@model List<EvalDotnet.Models.DepenseTicketDTO>
+
+@{
+    ViewData["Title"] = "Détails des Tickets";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Détails des Tickets</h2>
+
+    <!-- Affichage du message de succès -->
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.SuccessMessage
+        </div>
+    }
+
+    <!-- Affichage du message d'erreur -->
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Ticket</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Date de Création</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Sujet</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Priorité</th>
+                    <th scope="col">Actions</th> 
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model)
+                {
+                    <tr>
+                        <td>@ticket.Ticket.Ticket</td>
+                        <td>@ticket.Amount</td>
+                        <td>@ticket.CreatedAt.ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@ticket.Ticket.Status</td>
+                        <td>@ticket.Ticket.Subject</td>
+                        <td>@ticket.Ticket.Description</td>
+                        <td>@ticket.Ticket.Priority</td>
+                        <td>
+                            @if (ticket.Ticket.DeleteAt != null)
+                            {
+                                <!-- Afficher la date de suppression -->
+                                <span class="text-muted">Supprimé le : @ticket.Ticket.DeleteAt.Value.ToString("dd-MM-yyyy HH:mm")</span>
+                            }
+                            else
+                            {
+                                <!-- Icône Update -->
+                                <a href="@Url.Action("Edit", new { id = ticket.Ticket.Ticket })" class="btn btn-warning btn-sm">
+                                    <i class="fa fa-edit"></i> Modifier
+                                </a>
+                                <!-- Formulaire Delete -->
+                                <form action="@Url.Action("Delete", new { id = ticket.Ticket.Ticket })" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce ticket ?');">
+                                        <i class="fa fa-trash"></i> Supprimer
+                                    </button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">Aucun ticket trouvé pour la période sélectionnée.</div>
+    }
+</div>

@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Tableau de Bord</h2>
+
+    <!-- Formulaire de filtrage des dates -->
+    <form method="post" action="/Dashboard/Filtrer">
+        <div class="row">
+            <div class="col-md-5">
+                <label for="dateDebut">Date et heure de début</label>
+                <input type="datetime-local" class="form-control" id="dateDebut" name="dateDebut" required>
+            </div>
+            <div class="col-md-5">
+                <label for="dateFin">Date et heure de fin</label>
+                <input type="datetime-local" class="form-control" id="dateFin" name="dateFin" required>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Affichage des tickets par statut sous forme de graphique -->
+    @if (ViewBag.TicketsByStatus != null)
+    {
+        <div class="mt-5 row">
+            <div class="col-md-4">
+                <h4 class="text-center">Tickets par Statut</h4>
+                <canvas id="ticketsChart"></canvas>
+                <div class="text-center mt-3">
+                    <strong>Total des Montants :</strong> 
+                    <a href="@Url.Action("Details", "Dashboard", new { start = ViewBag.DateDebut, end = ViewBag.DateFin })">
+                        @ViewBag.TotalAmount
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Récupérer les données de tickets par statut depuis ViewBag
+                var ticketStatuses = JSON.parse('@Html.Raw(ViewBag.TicketStatuses)');
+                var ticketCounts = JSON.parse('@Html.Raw(ViewBag.TicketCounts)');
+
+                // Créer un graphique avec Chart.js
+                var ticketsCtx = document.getElementById("ticketsChart").getContext("2d");
+
+                new Chart(ticketsCtx, {
+                    type: "line",
+                    data: {
+                        labels: ticketStatuses,
+                        datasets: [{
+                            label: "Nombre de Tickets",
+                            data: ticketCounts,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    }
+    else if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger mt-3">@ViewBag.ErrorMessage</div>
+    }
+</div>
