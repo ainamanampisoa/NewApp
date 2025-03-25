@@ -15,17 +15,10 @@
         
         <form asp-action="Login" method="post">
             <div class="mb-3">
-                <label asp-for="Username" class="form-label fw-semibold">Login</label>
-                <input asp-for="Username" type="text" class="form-control" placeholder="Entrez votre login">
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <label asp-for="Email" class="form-label fw-semibold">Login</label>
+                <input asp-for="Email" type="text" class="form-control" placeholder="Entrez votre email">
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label fw-semibold">Mot de passe</label>
-                <input asp-for="Password" type="password" class="form-control" placeholder="Entrez votre mot de passe">
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
             <button type="submit" class="btn btn-primary w-100">Se connecter</button>
         </form>
     </div>

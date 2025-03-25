@@ -1,5 +1,3 @@
-using CRM_Master.Services;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,8 +26,6 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true; // Sécuriser le cookie
     options.Cookie.IsEssential = true; // Le cookie est essentiel pour le bon fonctionnement de l'application
 });
-
-builder.Services.AddScoped<AccountService>();
 
 builder.Services.AddCors(options =>
 {
@@ -66,7 +62,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
