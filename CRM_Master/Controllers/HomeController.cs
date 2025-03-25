@@ -20,7 +20,7 @@ namespace CRM_Master.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("Auth", "LoginForm");
+            return View();
         }
 
 
