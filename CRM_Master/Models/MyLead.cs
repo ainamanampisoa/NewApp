@@ -17,5 +17,6 @@ namespace CRM_Master.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? DeleteAt { get; set; }
         public int ParentLead { get; set; }
+        public Customer Customer { get; set; } // Relation avec Customer
     }
 }

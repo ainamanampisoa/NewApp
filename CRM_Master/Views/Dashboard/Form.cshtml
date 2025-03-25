@@ -22,10 +22,10 @@
         </div>
     </form>
 
-    <!-- Affichage des tickets par statut sous forme de graphique -->
-    @if (ViewBag.TicketsByStatus != null)
+    @if (ViewBag.TicketsByStatus != null || ViewBag.LeadsByStatus != null)
     {
         <div class="mt-5 row">
+            <!-- Graphique des tickets -->
             <div class="col-md-4">
                 <h4 class="text-center">Tickets par Statut</h4>
                 <canvas id="ticketsChart"></canvas>
@@ -36,18 +36,32 @@
                     </a>
                 </div>
             </div>
+
+            <div class="col-md-4">
+                <h4 class="text-center">Leads par Statut</h4>
+                <canvas id="leadsChart"></canvas>
+                <div class="text-center mt-3">
+                    <strong>Total des Montants Leads :</strong> 
+                    <a href="@Url.Action("DetailsLeads", "Dashboard", new { start = ViewBag.DateDebut, end = ViewBag.DateFin })">
+                        @ViewBag.TotalAmountL
+                    </a>
+                </div>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                // Récupérer les données de tickets par statut depuis ViewBag
+                // Récupérer les données de tickets par statut
                 var ticketStatuses = JSON.parse('@Html.Raw(ViewBag.TicketStatuses)');
                 var ticketCounts = JSON.parse('@Html.Raw(ViewBag.TicketCounts)');
 
-                // Créer un graphique avec Chart.js
-                var ticketsCtx = document.getElementById("ticketsChart").getContext("2d");
+                // Récupérer les données de leads par statut
+                var leadStatuses = JSON.parse('@Html.Raw(ViewBag.LeadStatuses)');
+                var leadCounts = JSON.parse('@Html.Raw(ViewBag.LeadCounts)');
 
+                // Création du graphique des tickets
+                var ticketsCtx = document.getElementById("ticketsChart").getContext("2d");
                 new Chart(ticketsCtx, {
                     type: "line",
                     data: {
@@ -57,6 +71,45 @@
                             data: ticketCounts,
                             borderColor: 'rgba(255, 99, 132, 1)',
                             fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Création du graphique des leads
+                var leadsCtx = document.getElementById("leadsChart").getContext("2d");
+
+                new Chart(leadsCtx, {
+                    type: "bar", // Histogramme
+                    data: {
+                        labels: leadStatuses,
+                        datasets: [{
+                            label: "Nombre de Leads",
+                            data: leadCounts,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.5)',
+                                'rgba(255, 159, 64, 0.5)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
                         }]
                     },
                     options: {

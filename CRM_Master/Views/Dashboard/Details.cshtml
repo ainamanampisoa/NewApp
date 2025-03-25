@@ -1,4 +1,4 @@
-@model List<EvalDotnet.Models.DepenseTicketDTO>
+@model List<CRM_Master.Models.DepenseTicketDTO>
 
 @{
     ViewData["Title"] = "Détails des Tickets";
@@ -31,6 +31,7 @@
                     <th scope="col">Ticket</th>
                     <th scope="col">Montant</th>
                     <th scope="col">Date de Création</th>
+                    <th scope="col">Client</th>
                     <th scope="col">Statut</th>
                     <th scope="col">Sujet</th>
                     <th scope="col">Description</th>
@@ -45,6 +46,7 @@
                         <td>@ticket.Ticket.Ticket</td>
                         <td>@ticket.Amount</td>
                         <td>@ticket.CreatedAt.ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@ticket.Ticket.Customer?.Name</td>
                         <td>@ticket.Ticket.Status</td>
                         <td>@ticket.Ticket.Subject</td>
                         <td>@ticket.Ticket.Description</td>

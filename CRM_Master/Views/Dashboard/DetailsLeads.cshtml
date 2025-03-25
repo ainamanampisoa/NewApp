@@ -1,0 +1,79 @@
+@model List<CRM_Master.Models.DepenseLeadDTO>
+
+@{
+    ViewData["Title"] = "Détails des Leads";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Détails des Leads</h2>
+
+    <!-- Affichage du message de succès -->
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.SuccessMessage
+        </div>
+    }
+
+    <!-- Affichage du message d'erreur -->
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">ID Lead</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Statut</th>
+                        <th scope="col">Téléphone</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Montant</th> <!-- Nouvelle colonne -->
+                        <th scope="col">Date de Création</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lead in Model)
+                    {
+                        <tr>
+                            <td>@lead.Lead.Lead</td>
+                            <td>@lead.Lead.Name</td>
+                            <td>@lead.Lead.Status</td>
+                            <td>@lead.Lead.Phone</td>
+                            <td>@lead.Lead.Customer?.Name</td>
+                            <td>@lead.Amount</td>
+                            <td>@lead.CreatedAt.ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>
+                                @if (lead.Lead.DeleteAt != null)
+                                {
+                                    <span class="text-muted">Supprimé le : @lead.Lead.DeleteAt.Value.ToString("dd-MM-yyyy HH:mm")</span>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Edit", new { id = lead.Lead.Lead })" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i> Modifier
+                                    </a>
+                                    <form action="@Url.Action("DeleteLead", new { id = lead.Lead.Lead })" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lead ?');">
+                                            <i class="fa fa-trash"></i> Supprimer
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">Aucun lead trouvé.</div>
+    }
+</div>

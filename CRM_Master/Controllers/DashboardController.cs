@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using CRM_Master.Models;
@@ -40,27 +40,37 @@ namespace CRM_Master.Controllers
             ViewBag.DateDebut = dateDebut.ToString("dd-MM-yyyy HH:mm");
             ViewBag.DateFin = dateFin.ToString("dd-MM-yyyy HH:mm");
 
-            // Formater l'URL de l'API avec les dates
             string apiUrlTicket = $"http://localhost:8080/dashbord/between-dates-depense-ticket?start={dateDebut:yyyy-MM-ddTHH:mm:ss}&end={dateFin:yyyy-MM-ddTHH:mm:ss}";
+            string apiUrlLead = $"http://localhost:8080/dashbord/between-dates-depense-lead?start={dateDebut:yyyy-MM-ddTHH:mm:ss}&end={dateFin:yyyy-MM-ddTHH:mm:ss}";
 
             try
             {
-                // Récupérer les tickets
-                var tickets = await _httpClient.GetFromJsonAsync<List<DepenseTicketDTO>>(apiUrlTicket);
-                if (tickets == null) tickets = new List<DepenseTicketDTO>();
+                var tickets = await _httpClient.GetFromJsonAsync<List<DepenseTicketDTO>>(apiUrlTicket) ?? new List<DepenseTicketDTO>();
                 decimal totalAmount = tickets.Sum(t => t.Amount);
 
-                HttpContext.Session.SetString("Tickets", JsonSerializer.Serialize(tickets));
+                var leads = await _httpClient.GetFromJsonAsync<List<DepenseLeadDTO>>(apiUrlLead) ?? new List<DepenseLeadDTO>();
+                decimal totalAmountL = leads.Sum(t => t.Amount);
 
-                // Regrouper les tickets par statut (exemple)
+                HttpContext.Session.SetString("Tickets", JsonSerializer.Serialize(tickets));
+                HttpContext.Session.SetString("Leads", JsonSerializer.Serialize(leads));
+
                 var groupedTickets = tickets.GroupBy(t => t.Ticket.Status)
                                             .ToDictionary(g => g.Key, g => g.Count());
 
-                // Passer les résultats à la vue
+                var groupedLeads = leads.GroupBy(t => t.Lead.Status)
+                                        .ToDictionary(g => g.Key, g => g.Count());
+
                 ViewBag.TicketsByStatus = groupedTickets;
                 ViewBag.TicketStatuses = JsonSerializer.Serialize(groupedTickets.Keys);
                 ViewBag.TicketCounts = JsonSerializer.Serialize(groupedTickets.Values);
                 ViewBag.TotalAmount = totalAmount;
+
+                // Passer les résultats à la vue pour les leads
+                ViewBag.LeadsByStatus = groupedLeads; // Correction ici
+                ViewBag.LeadStatuses = JsonSerializer.Serialize(groupedLeads.Keys);
+                ViewBag.LeadCounts = JsonSerializer.Serialize(groupedLeads.Values);
+                ViewBag.TotalAmountL = totalAmountL;
+
             }
             catch (Exception ex)
             {
@@ -110,7 +120,7 @@ namespace CRM_Master.Controllers
                 {
                     // Message de succès à afficher
                     ViewBag.SuccessMessage = "Ticket supprimé avec succès.";
-                    return RedirectToAction("Details");
+                    return RedirectToAction("Form");
                 }
                 else
                 {
@@ -126,5 +136,59 @@ namespace CRM_Master.Controllers
                 return View("Details");
             }
         }
+
+        [HttpGet]
+        public IActionResult DetailsLeads(DateTime start, DateTime end)
+        {
+            try
+            {
+                var leadsJson = HttpContext.Session.GetString("Leads");
+                if (string.IsNullOrEmpty(leadsJson))
+                {
+                    ViewBag.ErrorMessage = "Aucun résultat trouvé. Veuillez filtrer les dates à nouveau.";
+                    return View("Form");
+                }
+
+                var leads = JsonSerializer.Deserialize<List<DepenseLeadDTO>>(leadsJson);
+                return View(leads);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erreur lors de la récupération des données : {ex.Message}");
+                ViewBag.ErrorMessage = "Erreur lors de la récupération des données.";
+                return View("Form");
+            }
+        }
+
+        [HttpPost]
+        [Route("Dashboard/DeleteLead/{id}")]
+        public async Task<IActionResult> DeleteLead(int id)
+        {
+            try
+            {
+                string apiUrlDelete = $"http://localhost:8080/dashbord/delete-lead?id={id}";
+                var response = await _httpClient.GetAsync(apiUrlDelete );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    ViewBag.SuccessMessage = "Lead supprimé avec succès.";
+                    return RedirectToAction("Form");
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    _logger.LogError($"Erreur lors de la suppression du lead : {errorContent}");
+                    ViewBag.ErrorMessage = "La suppression du lead a échoué.";
+                    return View("DetailsLeads");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erreur lors de la suppression du lead : {ex.Message}");
+                ViewBag.ErrorMessage = "Erreur lors de la suppression du lead.";
+                return View("DetailsLeads");
+            }
+        }
+
     }
 }

@@ -1465,11 +1465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\STUDY\\EVAL\\NewApp\\CRM_Master\\CRM_Master.csproj",
+      "projectUniqueName": "D:\\STUDY\\EVAL\\NewAppC#\\NewApp\\CRM_Master\\CRM_Master.csproj",
       "projectName": "CRM_Master",
-      "projectPath": "D:\\STUDY\\EVAL\\NewApp\\CRM_Master\\CRM_Master.csproj",
+      "projectPath": "D:\\STUDY\\EVAL\\NewAppC#\\NewApp\\CRM_Master\\CRM_Master.csproj",
       "packagesPath": "C:\\Users\\Aina Manampisoa\\.nuget\\packages\\",
-      "outputPath": "D:\\STUDY\\EVAL\\NewApp\\CRM_Master\\obj\\",
+      "outputPath": "D:\\STUDY\\EVAL\\NewAppC#\\NewApp\\CRM_Master\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aina Manampisoa\\AppData\\Roaming\\NuGet\\NuGet.Config"

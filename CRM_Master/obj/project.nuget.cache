@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "huIWjQ2mkHs=",
+  "dgSpecHash": "byLS6GZHDVU=",
   "success": true,
-  "projectFilePath": "D:\\STUDY\\EVAL\\NewApp\\CRM_Master\\CRM_Master.csproj",
+  "projectFilePath": "D:\\STUDY\\EVAL\\NewAppC#\\NewApp\\CRM_Master\\CRM_Master.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aina Manampisoa\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "C:\\Users\\Aina Manampisoa\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\2.3.0\\microsoft.aspnetcore.cryptography.internal.2.3.0.nupkg.sha512",

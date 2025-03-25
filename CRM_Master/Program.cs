@@ -21,6 +21,8 @@ builder.Services.AddDistributedMemoryCache(); // Utilise la mémoire pour stocke
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30); // Durée d'expiration de la session
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Rend le cookie sécurisé
+    options.Cookie.SameSite = SameSiteMode.None; // Nécessite SecurePolicy = Always
     options.Cookie.HttpOnly = true; // Sécuriser le cookie
     options.Cookie.IsEssential = true; // Le cookie est essentiel pour le bon fonctionnement de l'application
 });
@@ -35,7 +37,6 @@ builder.Services.AddCors(options =>
                   .AllowAnyMethod();
         });
 });
-
 
 var app = builder.Build();
 
