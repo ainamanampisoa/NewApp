@@ -29,7 +29,7 @@ namespace CRM_Master.Controllers
             {
                 Console.WriteLine("token isn't null");
                 HttpContext.Session.SetString("AuthToken", token);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Form", "Dashboard");
             }
             else
             {

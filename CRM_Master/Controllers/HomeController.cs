@@ -18,6 +18,12 @@ namespace CRM_Master.Controllers
             _logger = logger;
         }
 
+        public IActionResult Index()
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+
         [HttpGet("message")]
         public IActionResult GetMessage()
         {
