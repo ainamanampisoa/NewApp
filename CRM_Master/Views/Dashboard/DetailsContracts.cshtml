@@ -1,0 +1,70 @@
+@model List<CRM_Master.Models.Contract>
+
+@{
+    ViewData["Title"] = "Détails des Contrats";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Détails des Contrats</h2>
+
+    <!-- Message de succès -->
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @ViewBag.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Message d'erreur -->
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @ViewBag.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Sujet</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Adresse</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contract in Model)
+                {
+                    <tr>
+                        <td><strong>@contract.ContractId</strong></td>
+                        <td>@contract.Subject</td>
+                        <td>
+                            @* <span class="badge @(contract.Status == "Actif" ? "bg-success" : "bg-secondary")"> *@
+                                @contract.Status
+                            @* </span> *@
+                        </td>
+                        <td>@contract.Description</td>
+                        <td>@contract.Amount.ToString("C")</td>
+                        <td>@contract.Customer?.Name</td>
+                        <td>@contract.Customer?.Email</td>
+                        <td>@contract.Customer?.Phone</td>
+                        <td>@($"{contract.Customer?.Address}, {contract.Customer?.City}, {contract.Customer?.Country}")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">Aucun contrat trouvé pour la période sélectionnée.</div>
+    }
+</div>

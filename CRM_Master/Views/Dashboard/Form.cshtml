@@ -1,131 +1,125 @@
 @{
     ViewData["Title"] = "Dashboard";
+    DateTime dateDebutParDefaut = new DateTime(2025, 1, 1);
+    DateTime dateFinParDefaut = DateTime.Today;
 }
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Tableau de Bord</h2>
-
-    <!-- Formulaire de filtrage des dates -->
+    <h2 class="text-center mb-4">Dashboard</h2>
     <form method="post" action="/Dashboard/Filtrer">
-        <div class="row">
+        <div class="row g-3">
             <div class="col-md-5">
-                <label for="dateDebut">Date et heure de début</label>
-                <input type="datetime-local" class="form-control" id="dateDebut" name="dateDebut" required>
+                <label for="dateDebut" class="form-label">Date et Heure de début</label>
+                <input type="datetime-local" class="form-control" id="dateDebut" name="dateDebut" value="@dateDebutParDefaut.ToString("yyyy-MM-ddTHH:mm:ss")" required>
             </div>
             <div class="col-md-5">
-                <label for="dateFin">Date et heure de fin</label>
-                <input type="datetime-local" class="form-control" id="dateFin" name="dateFin" required>
+                <label for="dateFin" class="form-label">Date et Heure de fin</label>
+                <input type="datetime-local" class="form-control" id="dateFin" name="dateFin" value="@dateFinParDefaut.ToString("yyyy-MM-ddT23:59:59")" required>
             </div>
             <div class="col-md-2 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+                <button type="submit" class="btn btn-primary w-100">PUSH</button>
             </div>
         </div>
     </form>
 
-    @if (ViewBag.TicketsByStatus != null || ViewBag.LeadsByStatus != null)
+    @if (ViewBag.TicketsByStatus != null || ViewBag.LeadsByStatus != null || ViewBag.ContractsByStatus != null)
     {
-        <div class="mt-5 row">
-            <!-- Graphique des tickets -->
+        <div class="row mt-4 text-center">
             <div class="col-md-4">
-                <h4 class="text-center">Tickets par Statut</h4>
-                <canvas id="ticketsChart"></canvas>
-                <div class="text-center mt-3">
-                    <strong>Total des Montants :</strong> 
-                    <a href="@Url.Action("Details", "Dashboard", new { start = ViewBag.DateDebut, end = ViewBag.DateFin })">
-                        @ViewBag.TotalAmount
-                    </a>
-                </div>
+                <strong>Total des Montants :</strong>
+                <a href="@Url.Action("Details", "Dashboard", new { start = ViewBag.DateDebut, end = ViewBag.DateFin, type = "ticket" })">
+                    @ViewBag.TotalTicketAmount
+                </a>
             </div>
-
             <div class="col-md-4">
-                <h4 class="text-center">Leads par Statut</h4>
-                <canvas id="leadsChart"></canvas>
-                <div class="text-center mt-3">
-                    <strong>Total des Montants Leads :</strong> 
-                    <a href="@Url.Action("DetailsLeads", "Dashboard", new { start = ViewBag.DateDebut, end = ViewBag.DateFin })">
-                        @ViewBag.TotalAmountL
-                    </a>
-                </div>
+                <strong>Total des Montants Leads :</strong>
+                <a href="@Url.Action("DetailsLeads", "Dashboard", new { start = ViewBag.DateDebut, end = ViewBag.DateFin })">
+                    @ViewBag.TotalAmountL
+                </a>
+            </div>
+            <div class="col-md-4">
+                <strong>Total des Montants :</strong>
+                <a href="@Url.Action("Details", "Dashboard", new { start = ViewBag.DateDebut, end = ViewBag.DateFin, type = "contract" })">
+                    @ViewBag.TotalContractAmount
+                </a>
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Récupérer les données de tickets par statut
-                var ticketStatuses = JSON.parse('@Html.Raw(ViewBag.TicketStatuses)');
-                var ticketCounts = JSON.parse('@Html.Raw(ViewBag.TicketCounts)');
-
-                // Récupérer les données de leads par statut
-                var leadStatuses = JSON.parse('@Html.Raw(ViewBag.LeadStatuses)');
-                var leadCounts = JSON.parse('@Html.Raw(ViewBag.LeadCounts)');
-
-                // Création du graphique des tickets
-                var ticketsCtx = document.getElementById("ticketsChart").getContext("2d");
-                new Chart(ticketsCtx, {
-                    type: "line",
-                    data: {
-                        labels: ticketStatuses,
-                        datasets: [{
-                            label: "Nombre de Tickets",
-                            data: ticketCounts,
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            fill: false
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-
-                // Création du graphique des leads
-                var leadsCtx = document.getElementById("leadsChart").getContext("2d");
-
-                new Chart(leadsCtx, {
-                    type: "bar", // Histogramme
-                    data: {
-                        labels: leadStatuses,
-                        datasets: [{
-                            label: "Nombre de Leads",
-                            data: leadCounts,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.5)',
-                                'rgba(54, 162, 235, 0.5)',
-                                'rgba(255, 206, 86, 0.5)',
-                                'rgba(75, 192, 192, 0.5)',
-                                'rgba(153, 102, 255, 0.5)',
-                                'rgba(255, 159, 64, 0.5)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            });
-        </script>
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <h4 class="text-center">Tickets par Statut</h4>
+                <canvas id="ticketsChart"></canvas>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-center">Leads par Statut</h4>
+                <canvas id="leadsChart"></canvas>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-center">Contrats par Statut</h4>
+                <canvas id="contractsChart"></canvas>
+            </div>
+        </div>
     }
     else if (ViewBag.ErrorMessage != null)
     {
-        <div class="alert alert-danger mt-3">@ViewBag.ErrorMessage</div>
+        <div class="alert alert-danger mt-3 text-center">@ViewBag.ErrorMessage</div>
     }
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var ticketStatuses = JSON.parse('@Html.Raw(ViewBag.TicketStatuses)');
+        var ticketCounts = JSON.parse('@Html.Raw(ViewBag.TicketCounts)');
+        var leadStatuses = JSON.parse('@Html.Raw(ViewBag.LeadStatuses)');
+        var leadCounts = JSON.parse('@Html.Raw(ViewBag.LeadCounts)');
+        var contractStatuses = JSON.parse('@Html.Raw(ViewBag.ContractStatuses)');
+        var contractCounts = JSON.parse('@Html.Raw(ViewBag.ContractCounts)');
+
+        // Chart for Tickets
+        new Chart(document.getElementById("ticketsChart"), {
+            type: "line",
+            data: {
+                labels: ticketStatuses,
+                datasets: [{
+                    label: "Nombre de Tickets",
+                    data: ticketCounts,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    fill: false
+                }]
+            },
+            options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
+
+        // Chart for Leads
+        new Chart(document.getElementById("leadsChart"), {
+            type: "bar",
+            data: {
+                labels: leadStatuses,
+                datasets: [{
+                    label: "Nombre de Leads",
+                    data: leadCounts,
+                    backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
+
+        // Chart for Contracts
+        new Chart(document.getElementById("contractsChart"), {
+            type: "pie",
+            data: {
+                labels: contractStatuses,
+                datasets: [{
+                    data: contractCounts,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                    borderColor: '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'top' } } }
+        });
+    });
+</script>

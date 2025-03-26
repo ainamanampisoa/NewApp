@@ -28,12 +28,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/DetailsContracts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERldGFpbHNDb250cmFjdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/DetailsLeads.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERldGFpbHNMZWFkcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/Form.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEZvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Home/Index.cshtml]
@@ -46,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Lead/Updatelead.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhZFxVcGRhdGVsZWFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/Error.cshtml]

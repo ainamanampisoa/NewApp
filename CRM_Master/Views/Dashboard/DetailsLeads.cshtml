@@ -7,47 +7,50 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Détails des Leads</h2>
 
-    <!-- Affichage du message de succès -->
+    <!-- Message de succès -->
     @if (ViewBag.SuccessMessage != null)
     {
-        <div class="alert alert-success">
-            @ViewBag.SuccessMessage
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ✅ @ViewBag.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
 
-    <!-- Affichage du message d'erreur -->
+    <!-- Message d'erreur -->
     @if (ViewBag.ErrorMessage != null)
     {
-        <div class="alert alert-danger">
-            @ViewBag.ErrorMessage
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ❌ @ViewBag.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
 
     @if (Model != null && Model.Any())
     {
-        <table class="table table-bordered">
-                <thead>
+        <div class="table-responsive shadow-lg p-3 mb-5 bg-body rounded">
+            <table class="table table-bordered text-center">
+                <thead class="table-light">
                     <tr>
                         <th scope="col">ID Lead</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Statut</th>
                         <th scope="col">Téléphone</th>
                         <th scope="col">Client</th>
-                        <th scope="col">Montant</th> <!-- Nouvelle colonne -->
+                        <th scope="col">Montant</th>
                         <th scope="col">Date de Création</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var lead in Model)
                     {
                         <tr>
-                            <td>@lead.Lead.Lead</td>
+                            <td><strong>@lead.Lead.Lead</strong></td>
                             <td>@lead.Lead.Name</td>
                             <td>@lead.Lead.Status</td>
                             <td>@lead.Lead.Phone</td>
                             <td>@lead.Lead.Customer?.Name</td>
-                            <td>@lead.Amount</td>
+                            <td>@lead.Amount.ToString("C")</td>
                             <td>@lead.CreatedAt.ToString("dd-MM-yyyy HH:mm")</td>
                             <td>
                                 @if (lead.Lead.DeleteAt != null)
@@ -56,24 +59,29 @@
                                 }
                                 else
                                 {
-                                    <a href="@Url.Action("Edit", new { id = lead.Lead.Lead })" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-edit"></i> Modifier
-                                    </a>
-                                    <form action="@Url.Action("DeleteLead", new { id = lead.Lead.Lead })" method="post" style="display:inline;">
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lead ?');">
-                                            <i class="fa fa-trash"></i> Supprimer
-                                        </button>
-                                    </form>
+                                    <div class="btn-group" role="group">
+                                        <!-- Bouton Modifier avec couleur gris -->
+                                        <a href="@Url.Action("UpdateLead", "Lead", new { id = lead.Lead.Lead })" class="btn btn-outline-secondary btn-sm me-2">
+                                            Modifier
+                                        </a>
+                                        <!-- Bouton Supprimer avec couleur rouge -->
+                                        <form action="@Url.Action("DeleteLead", new { id = lead.Lead.Lead })" method="post" style="display:inline;">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lead ?');">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                    </div>
                                 }
                             </td>
+
                         </tr>
                     }
                 </tbody>
-
-        </table>
+            </table>
+        </div>
     }
     else
     {
-        <div class="alert alert-info">Aucun lead trouvé.</div>
+        <div class="alert alert-info text-center">Aucun lead trouvé.</div>
     }
 </div>
