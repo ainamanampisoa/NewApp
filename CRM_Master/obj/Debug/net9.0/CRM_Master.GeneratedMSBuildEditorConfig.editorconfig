@@ -9,77 +9,77 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CRM_Master
 build_property.RootNamespace = CRM_Master
-build_property.ProjectDir = D:\STUDY\EVAL\NewAppC#\NewApp\CRM_Master\
+build_property.ProjectDir = d:\STUDY\EVAL\NewAppC#\NewApp\CRM_Master\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\STUDY\EVAL\NewAppC#\NewApp\CRM_Master
+build_property.MSBuildProjectDirectory = d:\STUDY\EVAL\NewAppC#\NewApp\CRM_Master
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Auth/Login.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/Details.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/DetailsContracts.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/DetailsContracts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERldGFpbHNDb250cmFjdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/DetailsLeads.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/DetailsLeads.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERldGFpbHNMZWFkcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/Form.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/Form.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/Update.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Dashboard/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Home/Index.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Home/Message.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Home/Message.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZXNzYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Home/Privacy.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Lead/Updatelead.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Lead/Updatelead.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhZFxVcGRhdGVsZWFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/Error.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/Menu.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE1lbnUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/_ValidationScriptsPartial.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/_ViewImports.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/_ViewStart.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/_Layout.cshtml]
+[d:/STUDY/EVAL/NewAppC\#/NewApp/CRM_Master/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-onybe0zrlt
